@@ -1,0 +1,10 @@
+/venv/
+/.venv/
+/.vscode/
+*.onnx
+/temp/
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.cnf
