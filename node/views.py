@@ -94,7 +94,7 @@ def post_face_swap(request):
         try:
             job_status = 'in_queue'
             server = request.get_host()
-            template_id = request.data['template_id']
+            template_id = data['template_id']
 
             template_app_obj = templateApp2.objects.get(sort_id=template_id)
             template_app_serizalizer = templateApp2Serializer(template_app_obj)
@@ -105,7 +105,7 @@ def post_face_swap(request):
             timer = int(time.time())
             
             try:
-                watermark = request.data['watermark']
+                watermark = data['watermark']
             except:
                 watermark = True
 
@@ -117,14 +117,19 @@ def post_face_swap(request):
                 is_image = True
 
             try:
-                new = request.data['new']
+                new = data['new']
             except:
                 new = True
+
+            try:
+                premium = data['premium']
+            except:
+                premium = False
 
             model_data = {'task_id': task_id,'status':job_status,'server':server,
                           'template_id':template_id,'watermark':watermark,
                           'is_image': is_image,'new':new, 'decoded_image':decode_img_path,
-                          'timer': timer, 'source': source}
+                          'timer': timer, 'source': source, 'premium':premium}
             
             responce_data = {'task_id': task_id}
             
@@ -382,7 +387,7 @@ def post_template(request):
                         'premium': premium})
             
         responce = {
-                    "status": 'in_queue_get_face',
+                    "status": 'OK',
                     "request_id": sort_id
                     }
 
@@ -404,6 +409,8 @@ def post_template(request):
             serialized_category_task = categoryToTemplateApp2Serializer(data=category_model_data)
             if serialized_category_task.is_valid():
                 serialized_category_task.save()
+
+            print('categories saved')
 
         serialized_template_task = templateApp2Serializer(data=template_model_data)
         if serialized_template_task.is_valid():

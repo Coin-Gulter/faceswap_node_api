@@ -62,7 +62,7 @@ class Consumer():
             
             self.db.execute_query(query_timer, (int(time.time())-task['timer'], task_id))
             self.db.execute_query(query_status, ('done', task_id))
-            self.db.execute_query(query_source, (settings.CDN_UPLOAD_PATH + source_path, task_id))
+            self.db.execute_query(query_source, (f'{settings.CDN_UPLOAD_PATH}/data/result/{str(task_id)}/{str(template_id) + str(source_extension)}', task_id))
 
             self.cdn.upload_to_cdn(cdn_result_path)
 

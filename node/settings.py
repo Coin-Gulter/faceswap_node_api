@@ -81,10 +81,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
             'read_default_file': 'config/mysql.cnf',
-            'ssl': {
-                'ca': 'certificates/ca.pem',
-            },
-            'charset': 'utf8mb4',
+            # 'ssl': {
+            #     'ca': 'certificates/ca.pem',
+            # },
+            # 'charset': 'utf8mb4',
         }
     }
 }

@@ -14,7 +14,7 @@ def load_mysql_config(config_path):
     mysql_config['port'] = config.getint('client', 'port')
     mysql_config['user'] = config.get('client', 'user')
     mysql_config['password'] = config.get('client', 'password')
-    mysql_config['ssl_ca'] = config.get('client', 'ssl_ca')
+    # mysql_config['ssl_ca'] = config.get('client', 'ssl_ca')
     return mysql_config
 
 class MySQLDB:
@@ -27,7 +27,7 @@ class MySQLDB:
         self.port = mysql_config['port']
         self.password = mysql_config['password']
         self.database = mysql_config['database']
-        self.ssl = mysql_config['ssl_ca']
+        # self.ssl = mysql_config['ssl_ca']
         self.connection = None
 
     def connect(self):
@@ -39,7 +39,7 @@ class MySQLDB:
                 user=self.user,
                 password=self.password,
                 database=self.database,
-                ssl=ssl.create_default_context(cafile=self.ssl)
+                # ssl=ssl.create_default_context(cafile=self.ssl)
             )
         except Exception as e:
             print(f"Error, can't connect to the database: {e}")
